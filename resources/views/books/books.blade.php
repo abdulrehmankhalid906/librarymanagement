@@ -6,7 +6,7 @@
         <h3 class="mt-4">Books</h3>
         <a href="{{ route('books.create') }}" class="btn btn-primary btn-sm">Add Book</a>
     </div>
-    
+
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>Books Listing
@@ -39,6 +39,7 @@
                             <th>
                                 <a href="{{ route('books.edit', $book->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                 <a href="{{ route('books.destroy', $book->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="javascript:void(0)" class="btn btn-primary btn-sm" onclick="BookBooking({{ $book->id }})">Book Now</a>
                             </th>
                         </tr>
                     @endforeach
@@ -47,4 +48,30 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    function BookBooking(bookId)
+    {
+
+        console.log(bookId);
+        $.ajax({
+            url: "{{ route('booking.order') }}",
+            type: 'POST',
+            data: {
+                book_id: bookId,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response)
+            {
+                if(response)
+                {
+                    console.log('The Booking has been created');
+                }
+                console.log(response)
+
+            },
+        });
+    }
+</script>
 @endsection

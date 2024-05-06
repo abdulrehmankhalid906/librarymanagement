@@ -13,8 +13,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+Route::post('/booking/order',[BookController::class, 'bookingOrder'])->name('booking.order');
 
 Route::resource('/books', BookController::class);
 Route::resource('/orders', BookingController::class);
-

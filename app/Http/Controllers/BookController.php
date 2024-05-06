@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BookRequest;
 use App\Models\Book;
+use App\Models\Booking;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\BookingNotification;
 
 class BookController extends Controller
 {
@@ -86,5 +88,22 @@ class BookController extends Controller
         $book->delete();
 
         return redirect()->back()->with('success', 'The book has been deleted');
+    }
+
+    public function bookingOrder(Request $request)
+    {
+        $booking = new Booking();
+        $booking->book_id = $request->input('book_id');
+        $booking->user_id = auth()->id();
+        $booking->booking_date = now();
+        $booking->booking_status = 0;
+        $booking->save();
+
+        if ($booking->wasRecentlyCreated) {
+            $user = Auth::user();
+            $user->notify(new BookingNotification($user->name));
+        }
+
+        return response()->json(['message' => 'Booking order processed successfully']);
     }
 }

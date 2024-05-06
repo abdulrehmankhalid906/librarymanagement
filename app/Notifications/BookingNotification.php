@@ -7,16 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class WelcomeNotification extends Notification
+class BookingNotification extends Notification
 {
     use Queueable;
+
+    protected $name;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($name)
     {
-        //
+        $this->name = $name;
     }
 
     /**
@@ -35,10 +37,10 @@ class WelcomeNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->subject('Account Registered')
-                    ->line('Thank for creating the account.')
-                    ->action('Login', url('/login'));
-                    // ->line('Thank you for using our application!');
+        ->subject('Booking Notification')
+        ->greeting('Hello, ' . $this->name)
+        ->line('Your booking has been successfully processed.')
+        ->line('Thank you for using our service.');
     }
 
     /**
