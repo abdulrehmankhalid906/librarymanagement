@@ -2,7 +2,11 @@
 @section('content')
 
 <div class="container-fluid px-4">
-    <h3 class="mt-4">Books</h3>
+    <div class="d-flex justify-content-between align-items-center">
+        <h3 class="mt-4">Books</h3>
+        <a href="{{ route('books.create') }}" class="btn btn-primary btn-sm">Add Book</a>
+    </div>
+    
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>Books Listing
@@ -17,6 +21,7 @@
                         <th>Pages</th>
                         <th>Status</th>
                         <th>Published</th>
+                        <th>Operation</th>
                     </tr>
                 </thead>
 
@@ -30,7 +35,11 @@
                             <th>{{ $book->author }}</th>
                             <th>{{ $book->pages }}</th>
                             <th>{{ $book->is_active === 0 ? 'Yes' : 'No' }}</th>
-                            <th>{{ $book->created_at->format('m-d-Y') }}</th>
+                            <th>{{ $book->created_at->diffForHumans(); }}</th>
+                            <th>
+                                <a href="{{ route('books.edit', $book->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ route('books.destroy', $book->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                            </th>
                         </tr>
                     @endforeach
                 </tbody>

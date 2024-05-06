@@ -32,7 +32,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.add_book');
     }
 
     /**
@@ -40,12 +40,13 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
+        // dd($request->all());
         $book = new Book();
         $book->user_id = auth()->id();
         $book->name = $request->name;
         $book->author = $request->author;
         $book->pages = $request->pages;
-        $book->is_active = $request->is_active;
+        $book->is_active = $request->is_active === 'on' ? 1 : 0;
 
         $book->save();
 
@@ -57,7 +58,7 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //return $id;
     }
 
     /**
@@ -65,7 +66,7 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //return $id;
     }
 
     /**
@@ -73,14 +74,17 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //return $id;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $book = Book::findorFail($id);
+        $book->delete();
+
+        return redirect()->back()->with('success', 'The book has been deleted');
     }
 }
