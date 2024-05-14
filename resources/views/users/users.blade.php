@@ -25,8 +25,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Title</th>
+                                    <th>Name</th>
                                     <th>Email</th>
+                                    <th>Role</th>
                                     <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
@@ -36,8 +37,9 @@
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
+                                        <td>---</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->created_at }}</td>
+                                        <td>{{ $user->created_at->diffForHumans() }}</td>
                                         <td>
                                             <a href="{{ route('roles.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="fa-solid fas fa-edit"></i></a>
                                             <form action="{{ route('roles.destroy', $user->id) }}" method="post" style="display: inline;">
