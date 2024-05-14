@@ -53,7 +53,7 @@ class UserController extends Controller
 
         $user->syncRoles($request->role);
 
-        return redirect()->to_route('users.index')->with('success','User created successfully');
+        return redirect('/users')->with('success', 'Roles Assigned to User Successfully!');
     }
 
     /**
@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // $user 
     }
 
     /**

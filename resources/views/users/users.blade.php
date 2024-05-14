@@ -41,8 +41,8 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->created_at->diffForHumans() }}</td>
                                         <td>
-                                            <a href="{{ route('roles.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="fa-solid fas fa-edit"></i></a>
-                                            <form action="{{ route('roles.destroy', $user->id) }}" method="post" style="display: inline;">
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="fa-solid fas fa-edit"></i></a>
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="post" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm fa-solid fas fa-trash-alt"></button>
