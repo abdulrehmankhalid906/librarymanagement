@@ -18,8 +18,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/booking/order',[BookController::class, 'bookingOrder'])->name('booking.order');
 
-Route::resource('/books', BookController::class);
-Route::resource('/orders', BookingController::class);
-Route::resource('/users', UserController::class);
-Route::resource('/roles', RoleController::class);
-Route::resource('/permissions', PermissionController::class);
+Route::resources([
+    'books' => BookController::class,
+    'orders' => BookingController::class,
+    'users' => UserController::class,
+    'roles' => RoleController::class,
+    'permissions' => PermissionController::class
+]);
+
