@@ -41,7 +41,7 @@
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm fa-solid fas fa-trash-alt"></button>
                                             </form>
-                                            <a href="{{ route('assign-permissions', $role->id) }}" title="Assign Permission" class="btn btn-info btn-sm"><i class="fas fa-users-cog"></i></a>
+                                            {{-- <a href="{{ route('assign-permissions', $role->id) }}" title="Assign Permission" class="btn btn-info btn-sm"><i class="fas fa-users-cog"></i></a> --}}
                                         </td>
                                     </tr>
                                 @endforeach
