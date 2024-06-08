@@ -12,7 +12,7 @@ class GenerateInvoice extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::all();
+        $invoices = Invoice::where('is_active', 1)->get();
 
         return view('invoice.invoice',[
             'invoices' => $invoices
