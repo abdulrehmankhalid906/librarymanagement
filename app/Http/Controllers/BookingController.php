@@ -12,6 +12,7 @@ class BookingController extends Controller
      */
     public function index()
     {
+        //This code is written by mini-master....
         $bookings = Booking::with(['user','book'])->get();
         // return $bookings;
         return view('bookings.bookings', [
